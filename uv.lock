@@ -432,7 +432,6 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "fastapi", extra = ["standard"] },
-    { name = "pytest-cov" },
 ]
 
 [package.dev-dependencies]
@@ -445,10 +444,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "fastapi", extras = ["standard"], specifier = ">=0.121.2" },
-    { name = "pytest-cov", specifier = ">=7.0.0" },
-]
+requires-dist = [{ name = "fastapi", extras = ["standard"], specifier = ">=0.121.2" }]
 
 [package.metadata.requires-dev]
 dev = [
