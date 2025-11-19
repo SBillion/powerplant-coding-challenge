@@ -1,5 +1,6 @@
 import logging
 from fastapi import FastAPI
+from app.api import router
 
 # Configure logging
 logging.basicConfig(
@@ -21,6 +22,9 @@ def create_app() -> FastAPI:
         description="Calculate optimal power production plans based on merit order",
         version="0.1.0",
     )
+
+    # Include routers
+    app.mount("/", router)
 
     logger.info("Application initialized successfully")
 
