@@ -24,7 +24,7 @@ def create_app() -> FastAPI:
     )
 
     # Include routers
-    app.mount("/", router)
+    app.include_router(router)
 
     logger.info("Application initialized successfully")
 
