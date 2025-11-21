@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from app.models import FuelPrices, PowerPlant
 
 
-class ProductionRequest(BaseModel):
+class ProductionPlanRequest(BaseModel):
     """Request payload for production plan calculation."""
 
     load: float = Field(
@@ -18,7 +18,7 @@ class ProductionRequest(BaseModel):
                 {
                     "load": 480,
                     "fuels": {
-                        "gas(euros/MWh)": 13.4,
+                        "gas(euro/MWh)": 13.4,
                         "kerosine(euro/MWh)": 50.8,
                         "co2(euro/ton)": 20,
                         "wind(%)": 60,
@@ -57,17 +57,3 @@ class ProductionResponseItem(BaseModel):
 
     name: str = Field(description="Name of the powerplant")
     p: float = Field(description="Power output of the powerplant (MW)", ge=0)
-
-
-class ProductionResponse(list[ProductionResponseItem]):
-    """Response payload for all powerplants' production plan."""
-
-    model_config = {
-        "json_schema_extra": {
-            "examples": [
-                {"name": "Gasfire1", "p": 368.4},
-                {"name": "Turbojet1", "p": 0},
-                {"name": "Windpark1", "p": 90},
-            ],
-        }
-    }

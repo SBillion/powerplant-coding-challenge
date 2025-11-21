@@ -3,7 +3,7 @@ from pydantic import BaseModel, Field
 
 
 class FuelPrices(BaseModel):
-    gas: float = Field(alias=("gas(euros/MWh)"), description="Price of gas per MWh")
+    gas: float = Field(alias="gas(euro/MWh)", description="Price of gas per MWh")
     kerosine: float = Field(
         alias="kerosine(euro/MWh)", description="Price of kerosine per MWh"
     )
@@ -16,6 +16,7 @@ class FuelPrices(BaseModel):
     )
 
     model_config = {
+        "populate_by_name": True,
         "json_schema_extra": {
             "examples": [
                 {
@@ -25,13 +26,13 @@ class FuelPrices(BaseModel):
                     "wind": 60,
                 },
                 {
-                    "gas(euros/MWh)": 22.4,
+                    "gas(euro/MWh)": 22.4,
                     "kerosine(euro/MWh)": 70.8,
                     "co2(euro/ton)": 25,
                     "wind(%)": 45,
                 },
             ],
-        }
+        },
     }
 
 
@@ -61,3 +62,8 @@ class PowerPlant(BaseModel):
             ]
         }
     }
+
+
+class PowerPlantWithCostAndPower(PowerPlant):
+    cost_per_mwh: float
+    allocated_power: float = 0.0
