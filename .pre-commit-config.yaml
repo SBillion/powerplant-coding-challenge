@@ -19,3 +19,13 @@ repos:
           "--no-implicit-optional",
         ]
         additional_dependencies: []
+        
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: uv run pytest
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
