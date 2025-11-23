@@ -1,0 +1,28 @@
+services:
+  # Production service
+  powerplant-api:
+    build:
+      context: .
+      target: production
+    ports:
+      - "8888:8888"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    restart: unless-stopped
+
+  # Development service with hot-reload and tests
+  powerplant-api-dev:
+    build:
+      context: .
+      target: development
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./app:/app/app
+      - ./main.py:/app/main.py
+      - ./tests:/app/tests
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONDONTWRITEBYTECODE=1
+    restart: unless-stopped
